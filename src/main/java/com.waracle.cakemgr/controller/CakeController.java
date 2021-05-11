@@ -52,23 +52,8 @@ public class CakeController {
         return "redirect:/cakes";
     }
 
-    @RequestMapping(value = "/cakes/list", method = RequestMethod.GET)
-    public ModelAndView listCakes(ModelMap modelMap) {
-        return listCakes(modelMap, "list");
-    }
-
     @RequestMapping(value = "/cake", method = RequestMethod.GET)
     public Cake getCake(@RequestParam(name = "title") String title) {
         return cakeService.getCake(title);
-    }
-
-    private ModelAndView listCakes(ModelMap modelMap, String viewName) {
-        ModelAndView model = new ModelAndView(viewName);
-        List<Cake> cakes = cakeService.getCakes();
-        modelMap.addAttribute("cakes", cakes);
-        model.addObject("title", "Cake Manager");
-        model.addObject("message", "View and add Cakes!");
-        model.addAllObjects(modelMap);
-        return model;
     }
 }
